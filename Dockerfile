@@ -7,5 +7,6 @@ WORKDIR /usr/src/hexo-blog
 COPY . .
 # 安装 hexo-cli 
 RUN npm --strict-ssl=false --registry=https://registry.npm.taobao.org install hexo-cli -g 
+RUN npm install --force
 # 生成静态文件
 RUN hexo clean && hexo g && hexo s
