@@ -6,6 +6,6 @@ WORKDIR /usr/src/hexo-blog
 # 复制当前文件夹下面的所有文件到hexo-blog中
 COPY . .
 # 安装 hexo-cli 
-# RUN npm --strict-ssl=false --registry=https://registry.npm.taobao.org install hexo-cli -g && npm install
+RUN npm --strict-ssl=false --registry=https://registry.npm.taobao.org install hexo-cli -g 
 # 生成静态文件
 RUN hexo clean && hexo g && hexo s
