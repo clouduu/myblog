@@ -8,4 +8,4 @@ COPY . .
 # 安装 hexo-cli 
 RUN npm --strict-ssl=false --registry=https://registry.npm.taobao.org install hexo-cli -g && npm install
 # 生成静态文件
-RUN hexo clean && hexo g
+RUN hexo clean && hexo g && hexo s
