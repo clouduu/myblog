@@ -1,12 +1,14 @@
-# node环境镜像
-FROM node:current-slim AS build-env
+FROM node:slim
+RUN npm config set registry https://registry.npm.taobao.org 
+RUN npm install --strict-ssl=false -g cnpm --registry=https://registry.npm.taobao.org
+RUN cnpm install hexo-cli -g
 # 创建hexo-blog文件夹且设置成工作文件夹
-RUN mkdir -p /usr/src/hexo-blog
-WORKDIR /usr/src/hexo-blog
-# 复制当前文件夹下面的所有文件到hexo-blog中
-COPY . .
+RUN mkdir -p /usr/hexo-blog
+WORKDIR /usr/hexo-blog
+COPY . /usr/hexo-blog
 # 安装 hexo-cli 
-RUN npm install hexo-cli -g 
-RUN npm install --force
-# 生成静态文件
-RUN hexo clean && hexo g && hexo s
+RUN npm install
+RUN hexo clean
+RUN hexo g
+EXPOSE 4000
+CMD hexo s
